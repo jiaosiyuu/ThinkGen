@@ -3,7 +3,7 @@
 <h1> ThinkGen: Generalized Thinking for Visual Generation</h1>
 <h3></h3>
 
-Siyu Jiao<sup>1</sup>, Yiheng Lin<sup>1</sup>, Yujie Zhong<sup>2</sup>, Qi She<sup>2</sup>, Wei Zhou<sup>2</sup>, Xiaohan Lan<sup>2</sup>
+Siyu Jiao<sup>1</sup>, Yiheng Lin<sup>1</sup>, Yujie Zhong<sup>2</sup>, Qi She<sup>2</sup>, Wei Zhou<sup>2</sup>, Xiaohan Lan<sup>2</sup>   
 Zilong Huang<sup>2</sup>, Fei Yu<sup>2</sup>, Yingchen Yu<sup>2</sup>, Yunqing Zhao<sup>2</sup>, Yao Zhao<sup>1</sup>, Yunchao Wei<sup>1</sup>
 
 <sup>1</sup> Beijing Jiaotong University, <sup>2</sup> Bytedance
