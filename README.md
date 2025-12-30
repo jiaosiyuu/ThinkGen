@@ -9,7 +9,7 @@ Zilong Huang<sup>2</sup>, Fei Yu<sup>2</sup>, Yingchen Yu<sup>2</sup>, Yunqing Z
 <sup>1</sup> Beijing Jiaotong University, <sup>2</sup> Bytedance
 
 
-[![arXiv](https://img.shields.io/badge/arXiv%20paper-2502.20313-b31b1b.svg)](https://github.com/jiaosiyuu/ThinkGen)&nbsp;
+[![arXiv](https://img.shields.io/badge/arXiv%20paper-2512.23568-b31b1b.svg)](https://arxiv.org/abs/2512.23568)&nbsp;
 [![huggingface weights](https://img.shields.io/badge/%F0%9F%A4%97%20Weights-JSYuuu/ThinkGen-yellow)](https://huggingface.co/JSYuuu/ThinkGen)&nbsp;
 
 
@@ -63,19 +63,17 @@ pip install  --no-cache-dir flash-attn==2.7.4.post1 --no-build-isolation -i http
 from ThinkGen.model import ThinkGen_Chat
 import os
 
-model_path = "JSYuuu/ThinkGen"
-
 chat_model = ThinkGen_Chat(
-    model_path=model_path,
+    model_path="JSYuuu/ThinkGen",
     dtype='bf16',
     height=1024,
     width=1024
 )
 
 
-# Generation
+## Gen
 messages = [
-    {"type": "text", "value": '''A close-up image of a red apple with the words 'Tart & Sweet' in white, cursive font on its surface, forming a spiral pattern. The apple is centered in the frame, and the background is a green surface labeled 'Organic Produce' in black, bold letters. The apple has a visible stem and a small bite mark on its side with the word 'Juicy' written in a small, handwritten style near the bite.'''}
+    {"type": "text", "value": '''A young woman wearing a straw hat, standing in a golden wheat field.'''}
 ]
 results = chat_model.generate_image(messages)
 output_dir = "vis/chat"
@@ -87,8 +85,22 @@ for i, img in enumerate(results.images):
     print(f"Saved to {save_path}")
 
 
+## Gen-Think
+messages = [
+    {"type": "text", "value": '''A young woman wearing a straw hat, standing in a golden wheat field.'''}
+]
+results = chat_model.generate_image(messages, think=True)
+output_dir = "vis/chat"
+os.makedirs(output_dir, exist_ok=True)
 
-# Understanding
+print(f"cot & rewrite prompt: \n{results.prompt_cot}")
+for i, img in enumerate(results.images):
+    save_path = os.path.join(output_dir, f"result_think_{i}.png")
+    img.save(save_path)
+    print(f"Saved to {save_path}")
+
+
+## Und
 messages = [
     {"type": "image", "value": "images/teaser.png"},
     {"type": "text", "value": "Describe this image"}
@@ -97,5 +109,11 @@ messages = [
 response = chat_model.generate_text(messages)
 print(response)
 
-
 ```
+
+## Acknowledgments
+This work builds upon the following great open-source projects:
+* **OmniGen2:** https://github.com/VectorSpaceLab/OmniGen2
+* **Qwen3VL:** https://github.com/QwenLM/Qwen3-VL
+* **EasyR1:** https://github.com/hiyouga/EasyR1
+* **Flow-GRPO:** https://github.com/yifan123/flow_grpo

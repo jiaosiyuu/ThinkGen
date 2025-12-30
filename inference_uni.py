@@ -13,7 +13,7 @@ chat_model = ThinkGen_Chat(
 
 ## Gen
 messages = [
-    {"type": "text", "value": '''A close-up image of a red apple with the words 'Tart & Sweet' in white, cursive font on its surface, forming a spiral pattern. The apple is centered in the frame, and the background is a green surface labeled 'Organic Produce' in black, bold letters. The apple has a visible stem and a small bite mark on its side with the word 'Juicy' written in a small, handwritten style near the bite.'''}
+    {"type": "text", "value": '''A young woman wearing a straw hat, standing in a golden wheat field.'''}
 ]
 results = chat_model.generate_image(messages)
 output_dir = "vis/chat"
@@ -24,6 +24,21 @@ for i, img in enumerate(results.images):
     img.save(save_path)
     print(f"Saved to {save_path}")
 
+
+## Gen-Think
+messages = [
+    {"type": "text", "value": '''A young woman wearing a straw hat, standing in a golden wheat field.'''}
+]
+results = chat_model.generate_image(messages, think=True)
+output_dir = "vis/chat"
+os.makedirs(output_dir, exist_ok=True)
+
+print(f"cot & rewrite prompt: \n{results.prompt_cot}")
+
+for i, img in enumerate(results.images):
+    save_path = os.path.join(output_dir, f"result_think_{i}.png")
+    img.save(save_path)
+    print(f"Saved to {save_path}")
 
 
 ## Und

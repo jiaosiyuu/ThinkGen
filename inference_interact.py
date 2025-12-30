@@ -340,7 +340,6 @@ def main(args: argparse.Namespace, root_dir: str) -> None:
 
         input_image_path = None if len(input_image_path)==0 else input_image_path
         input_images = preprocess(input_image_path)
-        # input_images = [None, None]
 
         # Generate and save image
         results = run(args, accelerator, pipeline, instruction, args.negative_prompt, input_images)
@@ -353,7 +352,6 @@ def main(args: argparse.Namespace, root_dir: str) -> None:
 
         output_image_path = os.path.join(args.output_image_path, task)
         os.makedirs(output_image_path, exist_ok=True)
-        # os.makedirs(os.path.dirname(args.output_image_path), exist_ok=True)
 
         save_p = instruction[:30].replace(" ", "_").replace(",", "_").replace(".", "_")
         output_image_path = os.path.join(output_image_path, f"{save_p}--{time_str}.png")
